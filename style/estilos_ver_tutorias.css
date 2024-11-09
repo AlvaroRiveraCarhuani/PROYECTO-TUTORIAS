@@ -1,0 +1,93 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Encabezado principal */
+h1 {
+    text-align: center;
+    color: #4a90e2;
+    margin-top: 20px;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+/* Contenedor principal */
+.container {
+    width: 80%;
+    max-width: 800px;
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Lista de tutorías */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Tarjetas de cada tutoría */
+.tutoria-card {
+    background-color: #e3f2fd;
+    border: 1px solid #b0c4de;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px 0;
+    transition: transform 0.3s ease;
+}
+
+.tutoria-card:hover {
+    transform: scale(1.02);
+}
+
+/* Información de cada tutoría */
+.tutoria-card strong {
+    color: #081627;
+}
+
+.tutoria-card p {
+    margin: 5px 0;
+}
+
+/* Botón de solicitar tutoría */
+.tutoria-card button {
+    background-color: #4a90e2;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.tutoria-card button:hover {
+    background-color: #000000;
+}
+
+/* Mensaje de no tutorías disponibles */
+.no-tutorias {
+    text-align: center;
+    font-size: 1.2em;
+    color: #888;
+    padding: 20px;
+}
+.success-message {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}

@@ -1,0 +1,36 @@
+/* Modo claro (por defecto) */
+body {
+    background-color: #f8f9fa; /* Fondo claro */
+    color: #212529; /* Texto oscuro */
+}
+
+.table-container {
+    background-color: #ffffff; /* Fondo de la tabla */
+}
+
+/* Modo oscuro */
+body.dark-theme {
+    background-color: #121212; /* Fondo oscuro */
+    color: #f1f1f1; /* Texto claro */
+}
+
+body.dark-theme .table-container {
+    background-color: #1e1e1e; /* Fondo de la tabla oscuro */
+}
+
+body.dark-theme .table-bordered {
+    border-color: #444; /* Bordes oscuros */
+}
+
+body.dark-theme .btn-outline-secondary {
+    color: #f1f1f1;
+    border-color: #f1f1f1;
+}
+
+body.dark-theme .table-dark {
+    background-color: #343a40;
+}
+
+body.dark-theme a {
+    color: #eaecee;
+}
