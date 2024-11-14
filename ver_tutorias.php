@@ -19,7 +19,8 @@ $sql = "SELECT
             (SELECT estado FROM solicitudes WHERE id_tutoria = tutorias.id AND id_estudiante = :id_estudiante) AS solicitud_estado
         FROM tutorias
         JOIN usuarios ON tutorias.id_tutor = usuarios.id
-        WHERE tutorias.estado = 'disponible'";
+        WHERE tutorias.estado = 'disponible'";  // Asegurarse de que solo se traigan tutorías 'disponibles'
+
 $stmt = $conn->prepare($sql);
 $stmt->bindParam(':id_estudiante', $id_estudiante, PDO::PARAM_INT);
 $stmt->execute();
@@ -45,7 +46,13 @@ $tutorias = $stmt->fetchAll();
                         <p><strong>Fecha y Hora:</strong> <?php echo htmlspecialchars($tutoria['fecha_hora']); ?></p>
                         <p><strong>Tutor:</strong> <?php echo htmlspecialchars($tutoria['tutor_nombre']); ?></p>
 
-                        <?php if ($tutoria['solicitud_estado']): ?>
+                        <?php if ($tutoria['solicitud_estado'] === 'aceptada'): ?>
+                            <!-- Mostrar el botón para entrar a ver las secciones si la solicitud fue aceptada -->
+                            <form action="tutoria_sesion.php" method="GET">
+                                <input type="hidden" name="id" value="<?php echo $tutoria['tutoria_id']; ?>">
+                                <button type="submit">Ver Secciones</button>
+                            </form>
+                        <?php elseif ($tutoria['solicitud_estado']): ?>
                             <p class="solicitud-enviada">Solicitud enviada: <?php echo htmlspecialchars($tutoria['solicitud_estado']); ?></p>
                         <?php else: ?>
                             <form action="solicitar_tutoria.php" method="POST">

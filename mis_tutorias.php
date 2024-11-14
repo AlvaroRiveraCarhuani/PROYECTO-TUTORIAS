@@ -3,7 +3,7 @@ session_start();
 include('db.php');
 
 if (!isset($_SESSION['id']) || $_SESSION['tipo_usuario'] !== 'tutor') {
-    header('Location: login.php');
+    header('Location: login.html');
     exit();
 }
 

@@ -58,14 +58,13 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     </thead>
                     <tbody>
                         <?php foreach ($solicitudes as $solicitud): ?>
-                            <tr>
+                            <tr id="solicitud-<?php echo $solicitud['id']; ?>">
                                 <td><?php echo htmlspecialchars($solicitud['nombre_estudiante']); ?></td>
                                 <td><?php echo htmlspecialchars($solicitud['fecha_solicitud']); ?></td>
-                                <td><?php echo htmlspecialchars($solicitud['estado']); ?></td>
+                                <td id="estado-<?php echo $solicitud['id']; ?>"><?php echo htmlspecialchars($solicitud['estado']); ?></td>
                                 <td>
-                                    <!-- Enlaces para aceptar o rechazar la solicitud -->
-                                    <a href="aceptar_solicitud.php?id=<?php echo $solicitud['id']; ?>" class="btn btn-success btn-sm">Aceptar</a>
-                                    <a href="rechazar_solicitud.php?id=<?php echo $solicitud['id']; ?>" class="btn btn-danger btn-sm">Rechazar</a>
+                                    <button class="btn btn-success btn-sm aceptar-solicitud" data-id="<?php echo $solicitud['id']; ?>">Aceptar</button>
+                                    <button class="btn btn-danger btn-sm rechazar-solicitud" data-id="<?php echo $solicitud['id']; ?>">Rechazar</button>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -80,5 +79,37 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.aceptar-solicitud').forEach(button => {
+                button.addEventListener('click', () => manejarSolicitud(button.dataset.id, 'aceptar'));
+            });
+
+            document.querySelectorAll('.rechazar-solicitud').forEach(button => {
+                button.addEventListener('click', () => manejarSolicitud(button.dataset.id, 'rechazar'));
+            });
+
+            function manejarSolicitud(id, accion) {
+                fetch(`manejar_solicitud.php`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `id=${id}&accion=${accion}`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById(`estado-${id}`).textContent = data.nuevo_estado;
+                    } else {
+                        alert('Error al procesar la solicitud.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
